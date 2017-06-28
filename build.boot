@@ -3,7 +3,8 @@
  :dependencies '[[org.clojure/clojure "1.8.0"  :scope "provided"]
                  [adzerk/bootlaces    "0.1.13" :scope "test"]])
 
-(require '[adzerk.bootlaces :refer :all])
+(require '[adzerk.bootlaces      :refer :all]
+         '[manenko.boot-download :refer [download-file]])
 
 (def +project+ 'manenko/boot-download)
 (def +version+ "0.1.0-SNAPSHOT")
