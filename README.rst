@@ -23,6 +23,10 @@ and store the file under that name in the fileset root directory. Otherwise the
 file will be saved under the given output path (the last component of the path
 will be treated as a file name).
 
+    .. caution::
+       The task will fail if the :code:`output-path` is not specified and the
+       url has parameters (i.e. :code:`http://example.org/file?p=foo&q=bar`).
+
 ---------
 Functions
 ---------

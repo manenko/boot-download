@@ -53,7 +53,10 @@ The task downloads the file and adds it to the fileset as an asset.
 If the output path is not set then the task will get the file name from the url
 and store the file under that name in the fileset root directory. Otherwise the
 file will be saved under the given output path (the last component of the path
-will be treated as a file name)."
+will be treated as a file name).
+
+The task will fail if the output path is not specified and the url has
+parameters (i.e. http://example.org/file?p=foo&q=bar)."
   [u url         URL  str "The location of the remote file."
    o output-path PATH str "The location used to save the file. Optional."]
   (let [tmp (boot/tmp-dir!)]
