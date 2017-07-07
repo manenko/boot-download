@@ -4,7 +4,7 @@ boot-download
 
 |clojars|  |license|
 
-`Boot`_ task to download a file from a given url.
+`Boot`_ task to download a file from the given url.
 
 -----
 Tasks
