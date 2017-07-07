@@ -12,11 +12,17 @@ Tasks
 
 .. code-block:: clojure
 
-   (download-file [u url URL str])
+   (download-file [u url         URL  str "The location of the remote file."
+                   o output-path PATH str "The location used to save the file. Optional."])
 
 Downloads a single file from the given url and adds it to the fileset
 as an asset.
-                
+
+If the output path is not set then the task will get the file name from the url
+and store the file under that name in the fileset root directory. Otherwise the
+file will be saved under the given output path (the last component of the path
+will be treated as a file name).
+
 ---------
 Functions
 ---------
@@ -88,11 +94,10 @@ While the task is not designed to be usable from a console you still can invoke 
 TODO
 ----
 
-* Add an optional parameter :code:`--output-path` to the
-  :code:`download-file` task. If the output path is :code:`nil` then
-  the task will try to get the name of the file from the url and
-  download it to the root.
-                
+* If the :code:`--output-path` ends with :code:`'/'` then treat the last
+  component of the path as a folder (currently the task thinks it's a file name)
+  and download the file to that folder under the name extracted from the url.
+
 -------
 License
 -------
