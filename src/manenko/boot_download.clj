@@ -1,7 +1,7 @@
 (ns manenko.boot-download
   {:boot/export-tasks true}
-  (:require [boot.core :as boot]
-            [boot.util :refer [info]]
+  (:require [boot.core       :as boot]
+            [boot.util       :refer [dbug]]
             [clojure.java.io :as io])
   (:import java.net.URI
            java.nio.file.Paths))
@@ -61,7 +61,7 @@ parameters (i.e. http://example.org/file?p=foo&q=bar)."
    o output-path PATH str "The location used to save the file. Optional."]
   (let [tmp (boot/tmp-dir!)]
     (boot/with-pre-wrap fileset
-      (info output-path)
+      (dbug "Downloading %s to %s...\n" url output-path)
       (let [file-name (or output-path (get-file-name url))
             file      (io/file tmp file-name)]
         (io/make-parents file)
