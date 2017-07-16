@@ -7,7 +7,7 @@
          '[manenko.boot-download :refer [download-file]])
 
 (def +project+ 'manenko/boot-download)
-(def +version+ "0.1.0-SNAPSHOT")
+(def +version+ "0.2.0-SNAPSHOT")
 
 (bootlaces! +version+)
 
