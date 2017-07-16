@@ -1,7 +1,7 @@
 (ns manenko.boot-download
   {:boot/export-tasks true}
   (:require [boot.core       :as boot]
-            [boot.util       :refer [dbug]]
+            [boot.util       :refer [dbug info]]
             [clojure.java.io :as io])
   (:import java.net.URI
            java.nio.file.Paths))
@@ -26,7 +26,8 @@
 
 
 (defn get-all-downloaded-files
-  "Gets a seq of files (as `TmpFile` objects) downloaded by the `download-file` task."
+  "Gets a seq of files (as `TmpFile` objects) downloaded by the `download-file`
+  task."
   [fileset]
   (let [all-files (boot/ls fileset)]
     (boot/by-meta [#(contains? % ::downloaded-from)] all-files)))
@@ -50,20 +51,19 @@
 
 The task downloads the file and adds it to the fileset as an asset.
 
-If the output path is not set then the task will get the file name from the url
-and store the file under that name in the fileset root directory. Otherwise the
-file will be saved under the given output path (the last component of the path
-will be treated as a file name).
+If the output file path is not set then the task will get the file
+name from the url and store the file under that name in the fileset
+root directory.
 
 The task will fail if the output path is not specified and the url has
 parameters (i.e. http://example.org/file?p=foo&q=bar)."
-  [u url         URL  str "The location of the remote file."
-   o output-path PATH str "The location used to save the file. Optional."]
+  [u url         VAL str "The location of the remote file."
+   o output-file VAL str "The location used to save the file. Optional."]
   (let [tmp (boot/tmp-dir!)]
     (boot/with-pre-wrap fileset
-      (dbug "Downloading %s to %s...\n" url output-path)
-      (let [file-name (or output-path (get-file-name url))
-            file      (io/file tmp file-name)]
+      (info "Downloading %s to %s...\n" url output-file)
+      (let [file-path (or output-file (get-file-name url))
+            file      (io/file tmp file-path)]
         (io/make-parents file)
         (with-open [in  (io/input-stream url)
                     out (io/output-stream file)]
