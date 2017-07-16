@@ -24,7 +24,7 @@ name from the url and store the file under that name in the fileset
 root directory.
 
     .. caution::
-       The task will fail if the :code:`output-path` is not specified AND the
+       The task will fail if the :code:`output-file` was not specified AND the
        url has parameters (i.e. :code:`http://example.org/file?p=foo&q=bar`).
 
 
@@ -91,7 +91,7 @@ build.boot
      (let [root "https://github.com/electron/electron/releases/download"]
        (comp
         (download-file :url         (str root "/v1.7.4/electron-v1.7.4-linux-x64.zip")
-                       :output-path "downloads/electron-v1.7.4-linux-x64.zip")
+                       :output-file "downloads/electron-v1.7.4-linux-x64.zip")
         (extract-from-zip :archive    "downloads/electron-v1.7.4-linux-x64.zip"
                           :output-dir "extracted/electron/v1.7.4/linux-x64")
         (target))))
